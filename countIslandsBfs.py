@@ -55,6 +55,7 @@ def bfs(island, processed, i, j):
     processed[i][j] = True
     map[i][j] = island
 
+    # set the number of current island on the current node
     labels[i][j].config(text=island)
 
     # loop till queue is empty
@@ -75,6 +76,8 @@ def bfs(island, processed, i, j):
                 processed[nextRow][nextCol] = True
                 map[nextRow][nextCol] = island
                 q.append((nextRow, nextCol))
+
+                # set the number of current island to the next node
                 labels[nextRow][nextCol].config(text=island)
 
 
@@ -106,11 +109,12 @@ root.title("Breadth First Search")
 for i in range(len(map)):
     for j in range(len(map[i])):
 
+        # store the labels for each node
         value = map[i][j]
-        label = Label(root, text=value, fg="#fff", padx=20, pady=20, font=("Sans Serif Bold", 20)
-                      )
+        label = Label(root, text=value, fg="#fff", padx=20, pady=20, font=("Sans Serif Bold", 20))
         labels[i][j] = label
 
+        # set color if the node is land or water
         if value == 0:
             label.config(bg="#0000ff")
         else:
@@ -118,6 +122,6 @@ for i in range(len(map)):
 
         label.grid(row=i, column=j)
 
-print("El numero de islas es ", countIslands())
+print("The count of islands is ", countIslands())
 
 root.mainloop()
